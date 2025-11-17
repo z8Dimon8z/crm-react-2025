@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import useModel from "./useModel";
 import ProjectNav from "./ProjectNav";
 import React from "react";
@@ -6,7 +6,7 @@ import React from "react";
 const EditPage = () => {
   const { id } = useParams();
   const { getRequest, updateRequest, deleteRequest } = useModel();
-  // const history = useNavigate();
+  const navigate = useNavigate();
 
   const request = getRequest(id);
 
@@ -41,14 +41,14 @@ const EditPage = () => {
     e.preventDefault();
     updateRequest(id, formData);
     alert("Изменения сохранены!");
-    // history.push("/table");
+    navigate("/table");
   };
 
   const handleDelete = () => {
     if (window.confirm("Вы уверены, что хотите удалить эту заявку?")) {
       deleteRequest(id);
       alert("Заявка удалена!");
-      // history.push("/table");
+      navigate("/table");
     }
   };
 
